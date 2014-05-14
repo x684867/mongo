@@ -11,7 +11,8 @@
 # 	1. You have an isolated Debian machine (virtual machines are great)
 #	2. At present this is a minimal install environment with root login.
 #
-export DEB_PKG_NAME="mongoDB-PACKAGE_NAME-x64-2.6.1-ssl.tar.gz"
+export SHORT_NAME="mongoDB-"
+export DEB_PKG_NAME="mongoDB-PACKAGE_NAME-x64-2.6.1-ssl.deb"
 export PACKAGES="server client mongos utils"
 export SRC_NAME="mongodb-src-r2.6.1"
 export SRC_FILE="$SRC_NAME.tar.gz"
@@ -136,9 +137,14 @@ for pkg in $(echo $PACKAGES); do
 	esac
 	cd $PACKAGE_DIR/
 	echo "Saving the build tree to ~/"
-	tar -cvzf ~/$(echo $DEB_PKG_NAME | sed -e "s/PACKAGE_NAME/$pkg/" )-binaries.tar.gz *
+	tar -cvzf ~/$(echo $SRC_NAME | sed -e "s/src/$pkg/" )-binaries.tar.gz *
 done
 
 #
 # Stopping here for testing
 # 
+#for pkg in $(echo $PACKAGES); do
+#	cd $PACKAGE_DIR/$pkg
+#	fakeroot dpkg-deb -b $SHORT_NAME-$pkg $DEB_PKG_NAME || ( echo "failed." && exit 1 )
+#done
+
