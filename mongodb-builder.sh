@@ -19,8 +19,7 @@ export SRC_FILE="$SRC_NAME.tar.gz"
 export SRC_URL="https://fastdl.mongodb.org/src/$SRC_FILE"
 export BUILD_DIR=~/build/mongodb-2.6.1-x86_64
 export PACKAGE_DIR=~/package
-
-
+#
 apt-get install sudo gnupg2 scons build-essential libboost-filesystem-dev -y
 apt-get install libboost-program-options-dev libboost-system-dev libboost-thread-dev -y
 apt-get install git-core build-essential libssl-dev devscripts debhelper python-pymongo -y
@@ -93,48 +92,45 @@ for pkg in $(echo $PACKAGES); do
 	cp -v ./debian/prerm $PACKAGE_DIR/$pkg/DEBIAN/
 	cp -v ./debian/mongodb-org.control $PACKAGE_DIR/$pkg/DEBIAN/
 	cp -v ./debian/mongodb-org.rules $PACKAGE_DIR/$pkg/DEBIAN/
-	cp -v ./debian/mongodb-org-server.postinst $PACKAGE_DIR/$pkg/
-	case $pkg in 
-		mongodb-server)
-			cp -v ./mongo $PACKAGE_DIR/$pkg/usr/bin
-			cp -v ./mongobridge $PACKAGE_DIR/$pkg/usr/bin
-			cp -v ./mongod $PACKAGE_DIR/$pkg/usr/bin
-			cp -v ./mongodump $PACKAGE_DIR/$pkg/usr/bin
-			cp -v ./mongoexport $PACKAGE_DIR/$pkg/usr/bin
-			cp -v ./mongofiles $PACKAGE_DIR/$pkg/usr/bin
-			cp -v ./mongoimport $PACKAGE_DIR/$pkg/usr/bin
-			cp -v ./mongooplog $PACKAGE_DIR/$pkg/usr/bin
-			cp -v ./mongoperf $PACKAGE_DIR/$pkg/usr/bin
-			cp -v ./mongorestore $PACKAGE_DIR/$pkg/usr/bin
-			cp -v ./mongos $PACKAGE_DIR/$pkg/usr/bin
-			cp -v ./mongostat $PACKAGE_DIR/$pkg/usr/bin
-			cp -v ./mongotop $PACKAGE_DIR/$pkg/usr/bin
-			cp -v ./debian/init.d $PACKAGE_DIR/$pkg/etc/init.d
-			cp -v ./debian/mongod.conf $PACKAGE_DIR/$pkg/etc
-		;;
-		mongodb-client)
-			cp -v ./mongo $PACKAGE_DIR/$pkg/usr/bin
-			cp -v ./mongobridge $PACKAGE_DIR/$pkg/usr/bin
-		;;
-		mongos)
-			cp -v ./mongo $PACKAGE_DIR/$pkg/usr/bin
-			cp -v ./mongobridge $PACKAGE_DIR/$pkg/usr/bin
-			cp -v ./mongos $PACKAGE_DIR/$pkg/usr/bin
-			cp -v ./debian/init.d $PACKAGE_DIR/$pkg/etc/init.d
-			cp -v ./debian/mongod.conf $PACKAGE_DIR/$pkg/etc
-		;;
-		mongodb-utils)	
-			cp -v ./mongo $PACKAGE_DIR/$pkg/usr/bin
-			cp -v ./mongodump $PACKAGE_DIR/$pkg/usr/bin
-			cp -v ./mongofiles $PACKAGE_DIR/$pkg/usr/bin
-			cp -v ./mongoimport $PACKAGE_DIR/$pkg/usr/bin
-			cp -v ./mongooplog $PACKAGE_DIR/$pkg/usr/bin
-			cp -v ./mongoperf $PACKAGE_DIR/$pkg/usr/bin
-			cp -v ./mongorestore $PACKAGE_DIR/$pkg/usr/bin
-			cp -v ./mongostat $PACKAGE_DIR/$pkg/usr/bin
-			cp -v ./mongotop $PACKAGE_DIR/$pkg/usr/bin
-		;;
-	esac
+	cp -v ./debian/mongodb-org-server.postinst $PACKAGE_DIR/$pkg/DEBIAN
+done
+	
+cp -v ./mongo $PACKAGE_DIR/mongodb-server/usr/bin
+cp -v ./mongobridge $PACKAGE_DIR/mongodb-server/usr/bin
+cp -v ./mongod $PACKAGE_DIR/mongodb-server/usr/bin
+cp -v ./mongodump $PACKAGE_DIR/mongodb-server/usr/bin
+cp -v ./mongoexport $PACKAGE_DIR/mongodb-server/usr/bin
+cp -v ./mongofiles $PACKAGE_DIR/mongodb-server/usr/bin
+cp -v ./mongoimport $PACKAGE_DIR/mongodb-server/usr/bin
+cp -v ./mongooplog $PACKAGE_DIR/mongodb-server/usr/bin
+cp -v ./mongoperf $PACKAGE_DIR/mongodb-server/usr/bin
+cp -v ./mongorestore $PACKAGE_DIR/mongodb-server/usr/bin
+cp -v ./mongos $PACKAGE_DIR/mongodb-server/usr/bin
+cp -v ./mongostat $PACKAGE_DIR/mongodb-server/usr/bin
+cp -v ./mongotop $PACKAGE_DIR/mongodb-server/usr/bin
+cp -v ./debian/init.d $PACKAGE_DIR/mongodb-server/etc/init.d
+cp -v ./debian/mongod.conf $PACKAGE_DIR/mongodb-server/etc
+
+cp -v ./mongo $PACKAGE_DIR/mongodb-client/usr/bin
+cp -v ./mongobridge $PACKAGE_DIR/mongodb-client/usr/bin
+
+cp -v ./mongo $PACKAGE_DIR/mongos/usr/bin
+cp -v ./mongobridge $PACKAGE_DIR/mongos/usr/bin
+cp -v ./mongos $PACKAGE_DIR/mongos/usr/bin
+cp -v ./debian/init.d $PACKAGE_DIR/mongos/etc/init.d
+cp -v ./debian/mongod.conf $PACKAGE_DIR/mongos/etc
+
+cp -v ./mongo $PACKAGE_DIR/mongodb-utils/usr/bin
+cp -v ./mongodump $PACKAGE_DIR/mongodb-utils/usr/bin
+cp -v ./mongofiles $PACKAGE_DIR/mongodb-utils/usr/bin
+cp -v ./mongoimport $PACKAGE_DIR/mongodb-utils/usr/bin
+cp -v ./mongooplog $PACKAGE_DIR/mongodb-utils/usr/bin
+cp -v ./mongoperf $PACKAGE_DIR/mongodb-utils/usr/bin
+cp -v ./mongorestore $PACKAGE_DIR/mongodb-utils/usr/bin
+cp -v ./mongostat $PACKAGE_DIR/mongodb-utils/usr/bin
+cp -v ./mongotop $PACKAGE_DIR/mongodb-utils/usr/bin
+
+for pkg in $(echo $PACKAGES); do
 	cd $PACKAGE_DIR/
 	echo "Saving the build tree to ~/"
 	tar -cvzf ~/$(echo $SRC_NAME | sed -e "s/src/$pkg/" )-binaries.tar.gz *
