@@ -33,12 +33,11 @@ easy_install pip
 
 mkdir -p $BUILD_DIR
 mkdir -p $PACKAGE_DIR
-
 #
 # 	4. Download the source code.
 #
-wget $SRC_URL || echo "failed to download source" && exit 1
-tar -xvzf $SRC_FILE || echo "failed to untar $SRC_FILE" && exit 1
+wget $SRC_URL || (echo "failed to download source" && exit 1)
+tar -xvzf $SRC_FILE || (echo "failed to untar $SRC_FILE" && exit 1)
 cd $SRC_NAME
 #
 # Compile the source
