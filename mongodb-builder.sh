@@ -20,11 +20,11 @@ export SRC_URL="https://fastdl.mongodb.org/src/$SRC_FILE"
 export BUILD_DIR=~/build/mongodb-2.6.1-x86_64
 export PACKAGE_DIR=~/package
 #
-sudo apt-get install sudo gnupg2 scons build-essential libboost-filesystem-dev -y
-sudo apt-get install libboost-program-options-dev libboost-system-dev libboost-thread-dev -y
-sudo apt-get install git-core build-essential libssl-dev devscripts debhelper python-pymongo -y
-sudo apt-get install python-setuptools libpcre3-dev dpkg-dev rpm fakeroot createrepo  -y
-sudo easy_install pip
+#sudo apt-get install sudo gnupg2 scons build-essential libboost-filesystem-dev -y
+#sudo apt-get install libboost-program-options-dev libboost-system-dev libboost-thread-dev -y
+#sudo apt-get install git-core build-essential libssl-dev devscripts debhelper python-pymongo -y
+#sudo apt-get install python-setuptools libpcre3-dev dpkg-dev rpm fakeroot createrepo  -y
+#sudo easy_install pip
 #
 # 	3. Create the environment.
 #
