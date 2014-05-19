@@ -36,8 +36,8 @@ mkdir -p $PACKAGE_DIR
 #
 # 	4. Download the source code.
 #
-wget $SRC_URL || (echo "failed to download source" && exit 1)
-tar -xvzf $SRC_FILE || (echo "failed to untar $SRC_FILE" && exit 1)
+wget $SRC_URL || (echo "failed to download source" && exit 1) && echo "download complete"
+tar -xvzf $SRC_FILE || (echo "failed to untar $SRC_FILE" && exit 1) && echo "extract of tarball complete."
 cd $SRC_NAME
 #
 # Compile the source
